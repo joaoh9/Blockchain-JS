@@ -5,7 +5,7 @@ const uuid = require("uuid/v1");
 class Blockchain {
   constructor() {
     this.pendingTransactions = [];
-    this.chainn = [];
+    this.chain = [];
     this.currentNodeUrl = currentNodeUrl;
     this.networkNodes = [];
     this.createNewBlock(100, "0", "0");
@@ -13,7 +13,7 @@ class Blockchain {
 
   createNewBlock(nonce, previousBlockHash, hash) {
     const newBlock = {
-      index: this.chainn.length,
+      index: this.chain.length,
       timestamp: Date.now(),
       transactions: this.pendingTransactions,
       nonce: nonce,
@@ -21,12 +21,12 @@ class Blockchain {
       previousBlockHash: previousBlockHash
     };
     this.pendingTransactions = [];
-    this.chainn.push(newBlock);
+    this.chain.push(newBlock);
     return newBlock;
   }
 
   getLastBlock() {
-    return this.chainn[this.chainn.length - 1];
+    return this.chain[this.chain.length - 1];
   }
 
   createNewTransaction(amount, sender, recipient) {
@@ -97,7 +97,7 @@ class Blockchain {
 
   getBlock(blockHash) {
     let correctBlock = null;
-    this.chainn.forEach(block => {
+    this.chain.forEach(block => {
       if (block.hash === blockHash) correctBlock = block;
     });
     return correctBlock;
@@ -106,7 +106,7 @@ class Blockchain {
   getTransaction(transactionId) {
     let correctTransaction = null;
     let correctBlock = null;
-    this.chainn.forEach(block => {
+    this.chain.forEach(block => {
       block.transactions.forEach(transaction => {
         if (transaction.transactionId === transactionId) {
           correctTransaction = transaction;
@@ -122,7 +122,7 @@ class Blockchain {
 
   getAddressData(address) {
     const addressTransactions = [];
-    this.chainn.forEach(block => {
+    this.chain.forEach(block => {
       block.transactions.forEach(transaction => {
         if (
           transaction.sender === address ||
