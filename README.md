@@ -13,10 +13,15 @@
 - run:
 
 ```console
-nodemon --watch dev -e js src/networkNode.js 300X http://localhost:300X"
+nodemon --watch dev -e js src/networkNode.js 3001 http://localhost:3001"
+console
+nodemon --watch dev -e js src/networkNode.js 3002 http://localhost:3002"
+console
+nodemon --watch dev -e js src/networkNode.js 3003 http://localhost:3003"
 ```
 
-for each node of the Blockchain, where X is a number from 0 to 9
+for each node of the Blockchain, for as many nodes as you want, just keep increasing the 3003 port number.
+Each of the nodes is now a port and it supports the following API operations:
 
 ## Get Routes
 
